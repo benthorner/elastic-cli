@@ -11,8 +11,8 @@ module ElasticCli
         c.option '--port PORT', String, 'Elasticsearch port'
 
         c.action do |args, options|
-          options.default(host: 'localhost')
-          options.default(port: '9200')
+          options.default(host: ENV['ELASTIC_HOST'])
+          options.default(port: ENV['ELASTIC_PORT'])
 
           index, id = *args
           fail('Missing argument: index') unless index
