@@ -9,17 +9,19 @@ module ElasticCli
         c.description = 'Edit a document'
         c.option '--host HOST', String, 'Elasticsearch host'
         c.option '--port PORT', String, 'Elasticsearch port'
+        c.option '--type TYPE', String, 'Document type'
 
         c.action do |args, options|
           options.default(host: ENV['ELASTIC_HOST'])
           options.default(port: ENV['ELASTIC_PORT'])
+          options.default(type: ENV['ELASTIC_TYPE'])
 
           index, id = *args
           fail('Missing argument: index') unless index
           fail('Missing argument: id') unless id
 
           client = client_for(options)
-          params = { index: index, id: id, type: 'default' }
+          params = { index: index, id: id, type: options.type }
 
           puts "Opening document in #{index}"
           call(client, **params)

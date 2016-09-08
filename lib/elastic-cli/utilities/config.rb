@@ -9,9 +9,11 @@ module ElasticCli
         if File.exists?(PATH)
           settings = YAML.load(File.read(PATH))
           host, port = settings[:host], settings[:port]
+          type = settings[:type]
 
           ENV['ELASTIC_HOST'] = host if host
           ENV['ELASTIC_PORT'] = port if port
+          ENV['ELASTIC_TYPE'] = type if type
         end
       end
 

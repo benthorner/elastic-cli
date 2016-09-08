@@ -5,6 +5,7 @@ $LOAD_PATH.unshift lib
 
 ENV['ELASTIC_HOST'] = 'localhost'
 ENV['ELASTIC_PORT'] = '9200'
+ENV['ELASTIC_TYPE'] = 'default'
 
 require 'elastic-cli'
 run!

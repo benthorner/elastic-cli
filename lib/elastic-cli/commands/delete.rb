@@ -8,16 +8,18 @@ module ElasticCli
         c.description = 'Delete a document'
         c.option '--host HOST', String, 'Elasticsearch host'
         c.option '--port PORT', String, 'Elasticsearch port'
+        c.option '--type TYPE', String, 'Document type'
 
         c.action do |args, options|
           options.default(host: ENV['ELASTIC_HOST'])
           options.default(port: ENV['ELASTIC_PORT'])
+          options.default(type: ENV['ELASTIC_TYPE'])
 
           index, id = *args
           fail('Missing argument: index') unless index
           fail('Missing argument: id') unless id
 
-          params = { index: index, id: id, type: 'default' }
+          params = { index: index, id: id, type: options.type }
           client = client_for(options)
 
           call(client, **params)
