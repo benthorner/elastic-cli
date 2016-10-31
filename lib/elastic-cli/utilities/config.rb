@@ -1,4 +1,4 @@
-require 'yaml' 
+require 'yaml'
 
 module ElasticCli
   module Utilities
@@ -9,11 +9,12 @@ module ElasticCli
         if File.exists?(PATH)
           settings = YAML.load(File.read(PATH))
           host, port = settings[:host], settings[:port]
-          type = settings[:type]
+          type, size = settings[:type], settings[:size]
 
           ENV['ELASTIC_HOST'] = host if host
           ENV['ELASTIC_PORT'] = port if port
           ENV['ELASTIC_TYPE'] = type if type
+          ENV['ELASTIC_SIZE'] = size if size
         end
       end
 
